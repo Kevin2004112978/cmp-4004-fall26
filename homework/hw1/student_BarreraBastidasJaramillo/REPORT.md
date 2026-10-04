@@ -18,13 +18,13 @@ recalculado, óptimo contra A*); al modelo nunca se le pregunta si acertó.
 | Eje | Clásico (A*) | LLM | LLM + herramienta | Evidencia |
 |---|---|---|---|---|
 | Corrección | 80/80 | 0/80 | 26/80 | `results/duel_summary.csv` |
-| Garantía | Devuelve un camino de costo mínimo **siempre que** h no sobreestime (verificado en los 181 440 estados del puzzle). No promete nada sobre el tiempo. | Ninguna. 0/80 no dice nada de la instancia 81. | Óptimo **solo si** el modelo llama a la herramienta, copia la instancia exacta y repite el resultado exacto. Ninguna condición está garantizada y las tres fallaron. | `code/tests`, `results/failures.md` |
+| Garantía | Devuelve un camino de costo mínimo **siempre que** h no sobreestime (verificado en los 181 440 estados del puzzle). No promete nada sobre el tiempo. | Ninguna. 0/80 no dice nada de la instancia 81. | Óptimo **solo si** el modelo llama a la herramienta, copia la instancia exacta y repite el resultado exacto. Ninguna condición está garantizada y las tres fallaron. | `code/tests`, `results/duel_runs.csv` |
 | Costo | 12 expansiones (mediana) | 195 tokens (mediana) | 856 tokens + 12 expansiones | `results/duel_summary.csv` |
 | Latencia (mediana / p95) | 0,09 ms / 0,5 ms | 0,23 s / 6,1 s | 0,97 s / 59,4 s | `results/duel_summary.csv` |
 | Reproducibilidad | 1 respuesta distinta en 5 | 1 en 5 (T=0); 5 en 5 (T=0,8) | no medida | `results/repro.csv` |
 | Escalamiento | corrección plana en 100 %; el costo crece (Fig. 1) | plano en 0 %, sin precipicio | precipicio entre 9 y 25 celdas (Fig. 4) | `fig/fig4_duel_scaling.png` |
 | Interpretabilidad | camino + costo, comprobable contra UCS | un camino sin justificación | llamada JSON registrada y auditable | `.llm_cache/` |
-| Modo de falla | timeout (solo IDS en 16×16); A* no falló | equivocado y seguro: 80 caminos ilegales | mal formado o sin llamada (41), ilegal (13) | `results/failures.md` |
+| Modo de falla | timeout (solo IDS en 16×16); A* no falló | equivocado y seguro: 80 caminos ilegales | mal formado o sin llamada (41), ilegal (13) | `results/duel_runs.csv` |
 
 **Categorías de falla** (80 instancias por sistema):
 

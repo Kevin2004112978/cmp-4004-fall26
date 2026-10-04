@@ -30,7 +30,7 @@ garantía de A*, porque esa garantía vale solo para el problema que A* recibe.
 **Qué obtuvimos:** Código que recorre el camino movimiento por movimiento, recalcula
 el costo y lo compara con A*, con las tres categorías de falla del deber más
 `no_answer` para respuestas ilegibles.
-**Qué hicimos con eso:** Se revisó results/failures.md y duel_runs.csv para ver cómo 
+**Qué hicimos con eso:** Se revisó results/duel_runs.csv para ver cómo 
 clasificó las respuestas del modelo. 
 **¿Lo entendimos?** Sí. El validador nunca le pregunta al modelo si acertó, recorre el 
 camino paso a paso y, si se sale del tablero o no termina en la meta, es ilegal. Si es
