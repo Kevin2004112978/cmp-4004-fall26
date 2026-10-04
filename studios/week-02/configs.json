@@ -1,0 +1,62 @@
+{
+  "note": "all 8 start configurations of the 2-room world (enumerated)",
+  "n": 8,
+  "configs": [
+    {
+      "dirt": [
+        true,
+        true
+      ],
+      "loc": 0
+    },
+    {
+      "dirt": [
+        true,
+        true
+      ],
+      "loc": 1
+    },
+    {
+      "dirt": [
+        true,
+        false
+      ],
+      "loc": 0
+    },
+    {
+      "dirt": [
+        true,
+        false
+      ],
+      "loc": 1
+    },
+    {
+      "dirt": [
+        false,
+        true
+      ],
+      "loc": 0
+    },
+    {
+      "dirt": [
+        false,
+        true
+      ],
+      "loc": 1
+    },
+    {
+      "dirt": [
+        false,
+        false
+      ],
+      "loc": 0
+    },
+    {
+      "dirt": [
+        false,
+        false
+      ],
+      "loc": 1
+    }
+  ]
+}

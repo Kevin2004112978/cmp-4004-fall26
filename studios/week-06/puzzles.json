@@ -1,0 +1,305 @@
+{
+  "_readme": "Week-6 studio puzzle bank for the three-arm Logic-LM experiment. 20 small Zebra/Einstein-style logic puzzles, each with the NL statement, the CSP encoding in the exact schema build_csp/parse_json expect (alldiff / neq / eq only), and the UNIQUE gold solution. 5 are marked worked_example:true (fully-worked starters; the first three match logic_lm.EXAMPLE_PUZZLES). Every puzzle is verified unique + matching by _verify_puzzles.py. Do not hand-edit a gold without re-running the verifier.",
+  "puzzles": [
+    {
+      "id": "p01",
+      "worked_example": true,
+      "puzzle": "Three friends -- Ana, Bob, Cara -- each pick a different colour from red, green, blue. Ana is not red. Bob is blue.",
+      "spec": {
+        "variables": {"Ana": ["red", "green", "blue"], "Bob": ["red", "green", "blue"], "Cara": ["red", "green", "blue"]},
+        "constraints": [
+          {"type": "alldiff", "vars": ["Ana", "Bob", "Cara"]},
+          {"type": "eq", "a": "Bob", "b": "blue"},
+          {"type": "neq", "a": "Ana", "b": "red"}
+        ]
+      },
+      "gold": {"Ana": "green", "Bob": "blue", "Cara": "red"}
+    },
+    {
+      "id": "p02",
+      "worked_example": true,
+      "puzzle": "Two houses, numbered 1 and 2, one owned by Xu and one by Yara. Xu does not live in house 1.",
+      "spec": {
+        "variables": {"Xu": [1, 2], "Yara": [1, 2]},
+        "constraints": [
+          {"type": "alldiff", "vars": ["Xu", "Yara"]},
+          {"type": "neq", "a": "Xu", "b": 1}
+        ]
+      },
+      "gold": {"Xu": 2, "Yara": 1}
+    },
+    {
+      "id": "p03",
+      "worked_example": true,
+      "puzzle": "Three tasks A, B, C run in slots 1, 2, 3 (all different). A runs in slot 1. C does not run in slot 2.",
+      "spec": {
+        "variables": {"A": [1, 2, 3], "B": [1, 2, 3], "C": [1, 2, 3]},
+        "constraints": [
+          {"type": "alldiff", "vars": ["A", "B", "C"]},
+          {"type": "eq", "a": "A", "b": 1},
+          {"type": "neq", "a": "C", "b": 2}
+        ]
+      },
+      "gold": {"A": 1, "B": 2, "C": 3}
+    },
+    {
+      "id": "p04",
+      "worked_example": true,
+      "puzzle": "Four runners -- Priya, Quinn, Rosa, Sam -- finish in positions 1 to 4, all different. Priya finishes first. Rosa finishes fourth. Sam does not finish second.",
+      "spec": {
+        "variables": {"Priya": [1, 2, 3, 4], "Quinn": [1, 2, 3, 4], "Rosa": [1, 2, 3, 4], "Sam": [1, 2, 3, 4]},
+        "constraints": [
+          {"type": "alldiff", "vars": ["Priya", "Quinn", "Rosa", "Sam"]},
+          {"type": "eq", "a": "Priya", "b": 1},
+          {"type": "eq", "a": "Rosa", "b": 4},
+          {"type": "neq", "a": "Sam", "b": 2}
+        ]
+      },
+      "gold": {"Priya": 1, "Quinn": 2, "Rosa": 4, "Sam": 3}
+    },
+    {
+      "id": "p05",
+      "worked_example": true,
+      "puzzle": "Three students -- Lee, Mia, Nia -- each register for one seminar: Ethics or Robotics (more than one student may pick the same seminar). Lee registers for Ethics. Mia registers for a different seminar than Lee. Nia does not register for Robotics.",
+      "spec": {
+        "variables": {"Lee": ["Ethics", "Robotics"], "Mia": ["Ethics", "Robotics"], "Nia": ["Ethics", "Robotics"]},
+        "constraints": [
+          {"type": "eq", "a": "Lee", "b": "Ethics"},
+          {"type": "neq", "a": "Mia", "b": "Lee"},
+          {"type": "neq", "a": "Nia", "b": "Robotics"}
+        ]
+      },
+      "gold": {"Lee": "Ethics", "Mia": "Robotics", "Nia": "Ethics"}
+    },
+    {
+      "id": "p06",
+      "worked_example": false,
+      "puzzle": "Three cars -- red, silver, black -- are parked in spots 1, 2, 3, one car per spot. The black car is in spot 1. The red car is not in spot 3.",
+      "spec": {
+        "variables": {"red": [1, 2, 3], "silver": [1, 2, 3], "black": [1, 2, 3]},
+        "constraints": [
+          {"type": "alldiff", "vars": ["red", "silver", "black"]},
+          {"type": "eq", "a": "black", "b": 1},
+          {"type": "neq", "a": "red", "b": 3}
+        ]
+      },
+      "gold": {"red": 2, "silver": 3, "black": 1}
+    },
+    {
+      "id": "p07",
+      "worked_example": false,
+      "puzzle": "Four friends -- Ada, Ben, Cy, Dee -- sit in chairs 1 to 4, all different. Ben is in chair 1. Dee is in chair 4. Ada is not in chair 1 and not in chair 2.",
+      "spec": {
+        "variables": {"Ada": [1, 2, 3, 4], "Ben": [1, 2, 3, 4], "Cy": [1, 2, 3, 4], "Dee": [1, 2, 3, 4]},
+        "constraints": [
+          {"type": "alldiff", "vars": ["Ada", "Ben", "Cy", "Dee"]},
+          {"type": "eq", "a": "Ben", "b": 1},
+          {"type": "eq", "a": "Dee", "b": 4},
+          {"type": "neq", "a": "Ada", "b": 1},
+          {"type": "neq", "a": "Ada", "b": 2}
+        ]
+      },
+      "gold": {"Ada": 3, "Ben": 1, "Cy": 2, "Dee": 4}
+    },
+    {
+      "id": "p08",
+      "worked_example": false,
+      "puzzle": "Three houses are each painted white or gray (a colour may repeat). House A is white. House B is a different colour from House A. House C is a different colour from House B.",
+      "spec": {
+        "variables": {"A": ["white", "gray"], "B": ["white", "gray"], "C": ["white", "gray"]},
+        "constraints": [
+          {"type": "eq", "a": "A", "b": "white"},
+          {"type": "neq", "a": "B", "b": "A"},
+          {"type": "neq", "a": "C", "b": "B"}
+        ]
+      },
+      "gold": {"A": "white", "B": "gray", "C": "white"}
+    },
+    {
+      "id": "p09",
+      "worked_example": false,
+      "puzzle": "Five books are ranked 1 to 5 by preference, all different ranks: Novel, Poems, Essays, Manual, Comic. Novel is rank 1. Comic is rank 5. Essays is rank 3. Poems is not rank 2.",
+      "spec": {
+        "variables": {"Novel": [1, 2, 3, 4, 5], "Poems": [1, 2, 3, 4, 5], "Essays": [1, 2, 3, 4, 5], "Manual": [1, 2, 3, 4, 5], "Comic": [1, 2, 3, 4, 5]},
+        "constraints": [
+          {"type": "alldiff", "vars": ["Novel", "Poems", "Essays", "Manual", "Comic"]},
+          {"type": "eq", "a": "Novel", "b": 1},
+          {"type": "eq", "a": "Comic", "b": 5},
+          {"type": "eq", "a": "Essays", "b": 3},
+          {"type": "neq", "a": "Poems", "b": 2}
+        ]
+      },
+      "gold": {"Novel": 1, "Poems": 4, "Essays": 3, "Manual": 2, "Comic": 5}
+    },
+    {
+      "id": "p10",
+      "worked_example": false,
+      "puzzle": "Four chores -- Dishes, Laundry, Vacuum, Trash -- are each done on a different day: Mon, Tue, Wed, Thu. Dishes is done on Monday. Vacuum is done on Thursday. Trash is not done on Tuesday.",
+      "spec": {
+        "variables": {"Dishes": ["Mon", "Tue", "Wed", "Thu"], "Laundry": ["Mon", "Tue", "Wed", "Thu"], "Vacuum": ["Mon", "Tue", "Wed", "Thu"], "Trash": ["Mon", "Tue", "Wed", "Thu"]},
+        "constraints": [
+          {"type": "alldiff", "vars": ["Dishes", "Laundry", "Vacuum", "Trash"]},
+          {"type": "eq", "a": "Dishes", "b": "Mon"},
+          {"type": "eq", "a": "Vacuum", "b": "Thu"},
+          {"type": "neq", "a": "Trash", "b": "Tue"}
+        ]
+      },
+      "gold": {"Dishes": "Mon", "Laundry": "Tue", "Vacuum": "Thu", "Trash": "Wed"}
+    },
+    {
+      "id": "p11",
+      "worked_example": false,
+      "puzzle": "Three shirts -- X, Y, Z -- are each a distinct colour: teal, olive, plum. Y is teal. X is not teal and not olive.",
+      "spec": {
+        "variables": {"X": ["teal", "olive", "plum"], "Y": ["teal", "olive", "plum"], "Z": ["teal", "olive", "plum"]},
+        "constraints": [
+          {"type": "alldiff", "vars": ["X", "Y", "Z"]},
+          {"type": "eq", "a": "Y", "b": "teal"},
+          {"type": "neq", "a": "X", "b": "teal"},
+          {"type": "neq", "a": "X", "b": "olive"}
+        ]
+      },
+      "gold": {"X": "plum", "Y": "teal", "Z": "olive"}
+    },
+    {
+      "id": "p12",
+      "worked_example": false,
+      "puzzle": "Four presenters -- P, Q, R, S -- speak in slots 1 to 4, all different. R is in slot 2. Q is not in slot 1. S is not in slot 1 and not in slot 3.",
+      "spec": {
+        "variables": {"P": [1, 2, 3, 4], "Q": [1, 2, 3, 4], "R": [1, 2, 3, 4], "S": [1, 2, 3, 4]},
+        "constraints": [
+          {"type": "alldiff", "vars": ["P", "Q", "R", "S"]},
+          {"type": "eq", "a": "R", "b": 2},
+          {"type": "neq", "a": "Q", "b": 1},
+          {"type": "neq", "a": "S", "b": 1},
+          {"type": "neq", "a": "S", "b": 3}
+        ]
+      },
+      "gold": {"P": 1, "Q": 3, "R": 2, "S": 4}
+    },
+    {
+      "id": "p13",
+      "worked_example": false,
+      "puzzle": "Five athletes finish in positions 1 to 5, all different: Al, Bo, Cy, Di, Ed. Al finishes first. Ed finishes last. Cy is second. Bo is not second and not third.",
+      "spec": {
+        "variables": {"Al": [1, 2, 3, 4, 5], "Bo": [1, 2, 3, 4, 5], "Cy": [1, 2, 3, 4, 5], "Di": [1, 2, 3, 4, 5], "Ed": [1, 2, 3, 4, 5]},
+        "constraints": [
+          {"type": "alldiff", "vars": ["Al", "Bo", "Cy", "Di", "Ed"]},
+          {"type": "eq", "a": "Al", "b": 1},
+          {"type": "eq", "a": "Ed", "b": 5},
+          {"type": "eq", "a": "Cy", "b": 2},
+          {"type": "neq", "a": "Bo", "b": 2},
+          {"type": "neq", "a": "Bo", "b": 3}
+        ]
+      },
+      "gold": {"Al": 1, "Bo": 4, "Cy": 2, "Di": 3, "Ed": 5}
+    },
+    {
+      "id": "p14",
+      "worked_example": false,
+      "puzzle": "Three lamps are each set to on or off (a setting may repeat). Lamp1 is on. Lamp2 is set differently from Lamp1. Lamp3 is set differently from Lamp2.",
+      "spec": {
+        "variables": {"Lamp1": ["on", "off"], "Lamp2": ["on", "off"], "Lamp3": ["on", "off"]},
+        "constraints": [
+          {"type": "eq", "a": "Lamp1", "b": "on"},
+          {"type": "neq", "a": "Lamp2", "b": "Lamp1"},
+          {"type": "neq", "a": "Lamp3", "b": "Lamp2"}
+        ]
+      },
+      "gold": {"Lamp1": "on", "Lamp2": "off", "Lamp3": "on"}
+    },
+    {
+      "id": "p15",
+      "worked_example": false,
+      "puzzle": "Four flags -- N, E, S, W -- are each a distinct colour: red, blue, green, yellow. N is red. S is green. E is not blue and not green.",
+      "spec": {
+        "variables": {"N": ["red", "blue", "green", "yellow"], "E": ["red", "blue", "green", "yellow"], "S": ["red", "blue", "green", "yellow"], "W": ["red", "blue", "green", "yellow"]},
+        "constraints": [
+          {"type": "alldiff", "vars": ["N", "E", "S", "W"]},
+          {"type": "eq", "a": "N", "b": "red"},
+          {"type": "eq", "a": "S", "b": "green"},
+          {"type": "neq", "a": "E", "b": "blue"},
+          {"type": "neq", "a": "E", "b": "green"}
+        ]
+      },
+      "gold": {"N": "red", "E": "yellow", "S": "green", "W": "blue"}
+    },
+    {
+      "id": "p16",
+      "worked_example": false,
+      "puzzle": "Three desks -- A, B, C -- are assigned to Tom, Uma, Val, one desk each. Uma is at desk A. Tom is not at desk B.",
+      "spec": {
+        "variables": {"Tom": ["A", "B", "C"], "Uma": ["A", "B", "C"], "Val": ["A", "B", "C"]},
+        "constraints": [
+          {"type": "alldiff", "vars": ["Tom", "Uma", "Val"]},
+          {"type": "eq", "a": "Uma", "b": "A"},
+          {"type": "neq", "a": "Tom", "b": "B"}
+        ]
+      },
+      "gold": {"Tom": "C", "Uma": "A", "Val": "B"}
+    },
+    {
+      "id": "p17",
+      "worked_example": false,
+      "puzzle": "Four switches are each up or down (a position may repeat). S1 is up. S2 is the opposite of S1. S3 is the opposite of S2. S4 is the opposite of S3.",
+      "spec": {
+        "variables": {"S1": ["up", "down"], "S2": ["up", "down"], "S3": ["up", "down"], "S4": ["up", "down"]},
+        "constraints": [
+          {"type": "eq", "a": "S1", "b": "up"},
+          {"type": "neq", "a": "S2", "b": "S1"},
+          {"type": "neq", "a": "S3", "b": "S2"},
+          {"type": "neq", "a": "S4", "b": "S3"}
+        ]
+      },
+      "gold": {"S1": "up", "S2": "down", "S3": "up", "S4": "down"}
+    },
+    {
+      "id": "p18",
+      "worked_example": false,
+      "puzzle": "Five houses numbered 1 to 5 are owned by Ana, Bea, Cam, Dan, Eli, all different. Eli owns house 1. Bea owns house 2. Ana owns neither an odd-numbered house nor house 2. Cam does not own house 5.",
+      "spec": {
+        "variables": {"Ana": [1, 2, 3, 4, 5], "Bea": [1, 2, 3, 4, 5], "Cam": [1, 2, 3, 4, 5], "Dan": [1, 2, 3, 4, 5], "Eli": [1, 2, 3, 4, 5]},
+        "constraints": [
+          {"type": "alldiff", "vars": ["Ana", "Bea", "Cam", "Dan", "Eli"]},
+          {"type": "eq", "a": "Eli", "b": 1},
+          {"type": "eq", "a": "Bea", "b": 2},
+          {"type": "neq", "a": "Ana", "b": 1},
+          {"type": "neq", "a": "Ana", "b": 3},
+          {"type": "neq", "a": "Ana", "b": 5},
+          {"type": "neq", "a": "Ana", "b": 2},
+          {"type": "neq", "a": "Cam", "b": 5}
+        ]
+      },
+      "gold": {"Ana": 4, "Bea": 2, "Cam": 3, "Dan": 5, "Eli": 1}
+    },
+    {
+      "id": "p19",
+      "worked_example": false,
+      "puzzle": "Three cups are each filled with tea or milk (a drink may repeat). Cup1 holds tea. Cup2 does not hold tea. Cup3 holds a different drink from Cup2.",
+      "spec": {
+        "variables": {"Cup1": ["tea", "milk"], "Cup2": ["tea", "milk"], "Cup3": ["tea", "milk"]},
+        "constraints": [
+          {"type": "eq", "a": "Cup1", "b": "tea"},
+          {"type": "neq", "a": "Cup2", "b": "tea"},
+          {"type": "neq", "a": "Cup3", "b": "Cup2"}
+        ]
+      },
+      "gold": {"Cup1": "tea", "Cup2": "milk", "Cup3": "tea"}
+    },
+    {
+      "id": "p20",
+      "worked_example": false,
+      "puzzle": "Four pens -- one each red, blue, green, black -- belong to W, X, Y, Z, all different. W has the red pen. Y has the black pen. X does not have the blue pen.",
+      "spec": {
+        "variables": {"W": ["red", "blue", "green", "black"], "X": ["red", "blue", "green", "black"], "Y": ["red", "blue", "green", "black"], "Z": ["red", "blue", "green", "black"]},
+        "constraints": [
+          {"type": "alldiff", "vars": ["W", "X", "Y", "Z"]},
+          {"type": "eq", "a": "W", "b": "red"},
+          {"type": "eq", "a": "Y", "b": "black"},
+          {"type": "neq", "a": "X", "b": "blue"}
+        ]
+      },
+      "gold": {"W": "red", "X": "green", "Y": "black", "Z": "blue"}
+    }
+  ]
+}
